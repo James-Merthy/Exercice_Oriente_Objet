@@ -14,6 +14,12 @@ public class Main {
 
     public static void main(String[] args) {
 
+        System.out.println("===================================");
+
+        System.out.println("=======Le grand tournois===========");
+
+        System.out.println("===================================");
+
         Circuit circuit1 = new Circuit(" Planette de vodka " , 2000);
 
         Voiture voiture1 = new Voiture(Model_véhicule.AUDI, Couleur_voiture.BLANCHE, 80, 200);
