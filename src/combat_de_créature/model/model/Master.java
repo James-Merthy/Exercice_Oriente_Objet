@@ -126,12 +126,5 @@ public class Master {
         monstre.armor_restorer(restoration());
     }
 
-    public boolean reduire_damage (Monstre monstre){
 
-        boolean etat_reduction_armor = false ;
-
-        return etat_reduction_armor ;
-
-
-    }
 }

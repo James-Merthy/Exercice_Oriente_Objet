@@ -16,6 +16,8 @@ public class Monstre {
 
     private int point_de_statistiqueMax = 42 ;
 
+    private boolean eta_reduction_damage_moitier = false ;
+
     public Monstre(String nom_du_monstre) {
 
         this.nom_du_monstre = nom_du_monstre;
@@ -118,5 +120,19 @@ public class Monstre {
         }
     }
 
+    public int getPoint_de_statistiqueMax() {
+        return point_de_statistiqueMax;
+    }
 
+    public void setPoint_de_statistiqueMax(int point_de_statistiqueMax) {
+        this.point_de_statistiqueMax = point_de_statistiqueMax;
+    }
+
+    public boolean isEta_reduction_damage_moitier() {
+        return eta_reduction_damage_moitier;
+    }
+
+    public void setEta_reduction_damage_moitier(boolean eta_reduction_damage_moitier) {
+        this.eta_reduction_damage_moitier = eta_reduction_damage_moitier;
+    }
 }

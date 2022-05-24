@@ -1,31 +1,33 @@
 package chevalier;
 
-import chevalier.model.Cavalier;
-import chevalier.model.Cheval;
+import chevalier.model.*;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        Cheval petitponey = new Cheval("mpunda" , 60 , 70);
+        Dragon d1 = new Dragon("Eragon", 100, 200);
+//        d1.crier();
+       Monture m1 = new Dragon("Grrr", 200, 300);
+//        ((Dragon) m1).voler();
+        Cheval ch1 = new Cheval("Petit poney", 10, 20, Sexe.FEMALE);
+//        System.out.println(ch1.getSexe().sexe);
+//        System.out.println(ch1.getSexe() == Sexe.MALE);
+        Cavalier c1 = new Cavalier("Jean", "Jacques");
+        c1.addMonture(ch1);
+        c1.addMonture(d1);
 
-        petitponey.setNom("mpunda");
+        for (Monture m : c1.getMontures().values()) {
+            m.crier();
+            if (m instanceof Cheval) {
+                System.out.println(((Cheval) m).courir());
+            }
 
-        petitponey.setVitesse_minimum(60);
+            if (m instanceof Dragon) {
+                ((Dragon) m).voler();
+            }
 
-        petitponey.setGetVitesse_maximum(70);
-
-        Cheval.henirv();
-
-        Cheval ch2 = new Cheval("mpundaada" , 40 , 80);
-
-        Cavalier cavalier = new Cavalier("jule" , "César");
-
-        cavalier.add_cheval(petitponey);
-
-        System.out.println(cavalier.getChevaux().get(petitponey.getNom()).courir());
-
-
-
+            System.out.println("----------------------------");
+        }
     }
 }

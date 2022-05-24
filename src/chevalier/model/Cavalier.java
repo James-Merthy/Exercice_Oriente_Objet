@@ -3,47 +3,40 @@ package chevalier.model;
 import java.util.HashMap;
 
 public class Cavalier {
-
     private String nom;
+    private String nomFamille;
+    private HashMap<String, Monture> montures;
 
-    private String nom_de_famille ;
+    // Constructeur
 
-    private HashMap <String , Cheval > chevaux ;
 
-    public Cavalier(String nom, String nom_de_famille) {
+    public Cavalier(String nom, String nomFamille) {
         this.nom = nom;
-        this.nom_de_famille = nom_de_famille;
-
-        this.chevaux = new HashMap<>();
-    }
-
-    public Cavalier(String nom, String nom_de_famille, HashMap<String, Cheval> chevaux) {
-        this.nom = nom;
-        this.nom_de_famille = nom_de_famille;
-        this.chevaux = chevaux;
+        this.nomFamille = nomFamille;
+        this.montures = new HashMap<>();
     }
 
     public String getNom() {
         return nom;
     }
 
-    public String getNom_de_famille() {
-        return nom_de_famille;
-    }
-
-    public HashMap<String, Cheval> getChevaux() {
-        return chevaux;
-    }
-
     public void setNom(String nom) {
         this.nom = nom;
     }
 
-    public void setNom_de_famille(String nom_de_famille) {
-        this.nom_de_famille = nom_de_famille;
+    public String getNomFamille() {
+        return nomFamille;
     }
 
-    public void add_cheval(Cheval cheval_A_ajouter) {
-        this.chevaux.put(cheval_A_ajouter.getNom(),cheval_A_ajouter);
+    public void setNomFamille(String nomFamille) {
+        this.nomFamille = nomFamille;
+    }
+
+    public HashMap<String, Monture> getMontures() {
+        return montures;
+    }
+
+    public void addMonture(Monture monture) {
+        this.montures.put(monture.getNom(), monture);
     }
 }
