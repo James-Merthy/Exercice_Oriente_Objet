@@ -18,7 +18,7 @@ public class Map {
     public void displayMap(){
 
         System.out.println("==============================================================");
-        System.out.println("==============================================================");
+        System.out.println("======================= SHORE WOOD ===========================");
         System.out.println("==============================================================");
         for (int i = 0;i < map.length; i++) {
 
@@ -36,8 +36,12 @@ public class Map {
             }
             System.out.println();
         }
-        System.out.println();
+        System.out.println("==============================================================");
+        System.out.println("======================= SHORE WOOD ===========================");
+        System.out.println("==============================================================");
     }
+
+
 
     public static void main(String[] args) {
 
