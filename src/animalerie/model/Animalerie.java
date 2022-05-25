@@ -3,11 +3,12 @@ package animalerie.model;
 import animalerie.enumeration.*;
 
 import javax.swing.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Animalerie {
+public  class  Animalerie {
 
 
     private List<Animale> nombre_d_animeau = new ArrayList<>();
@@ -142,6 +143,7 @@ public class Animalerie {
             if (estMort == true) {
 
                 System.out.println("Le chien : " + a.getNom() + " est mort :/");
+                nombre_d_animeau.remove(a);
 
 
             } else {
@@ -157,6 +159,7 @@ public class Animalerie {
             if (estMort == true) {
 
                 System.out.println("Le chat : " + a.getNom() + " est mort :/");
+                nombre_d_animeau.remove(a);
             } else {
                 System.out.println("Le chat : " + a.getNom() + " est vivant :)");
 
@@ -170,6 +173,8 @@ public class Animalerie {
             if (estMort == true) {
 
                 System.out.println("L'oiseaux : " + a.getNom() + " est mort :/");
+
+                nombre_d_animeau.remove(a);
             } else {
                 System.out.println("L'oiseaux : " + a.getNom() + " est vivant :)");
 
@@ -302,13 +307,11 @@ public class Animalerie {
 
         Scanner scanner = new Scanner(System.in);
 
-        Animale animale ;
+        Animale animale;
 
         System.out.print("Choissisez les types ==> chat/chien/oiseau: ");
 
         String Animale = scanner.next();
-
-
 
 
         System.out.println("------------------");
@@ -353,9 +356,39 @@ public class Animalerie {
 
         System.out.println("------------------");
 
+        System.out.println("date d'arriver: ");
+
+        System.out.print("entrée l'annee : ");
+
+        int anne = scanner.nextInt();
+
+        System.out.print("entrée le mois en chiffre : ");
+
+        int mois = scanner.nextInt();
+
+        System.out.print("entrée le jour en chiffre : ");
+
+        int jour = scanner.nextInt();
+
+        LocalDate date = LocalDate.of(anne, mois, jour);
+
+        System.out.println("------------------");
+
         switch (Animale) {
 
             case "chien":
+
+                System.out.println("---------couleur colier-----------");
+                System.out.println(" : rouge");
+                System.out.println(" : vert");
+                System.out.println(" : jaune");
+                System.out.println(" : bleu");
+                System.out.println(" : brun");
+                System.out.println(" : noir");
+                System.out.println(" : blanc");
+                System.out.println(" : violet");
+                System.out.println("other string : rose");
+                System.out.println("----------------------------------");
 
                 System.out.print("Couleur colier : ");
 
@@ -380,15 +413,39 @@ public class Animalerie {
 
                 int race = scanner.nextInt();
 
-                RaceChien racechien = RaceChien.convert(race) ;
+                RaceChien racechien = RaceChien.convert(race);
 
                 System.out.println("------------------");
 
-               // Animale chient = new Chien(nom,);
+                System.out.print("est dresser ? y/n : ");
+
+                String choixdressage = scanner.next();
+
+                boolean estdresser;
+
+                if (choixdressage.equals("y")) {
+                    estdresser = true;
+                } else {
+
+                    estdresser = false;
+                }
+
+                System.out.println("------------------");
+
+                animale = new Chien(nom, poid, taille, age, agehumain, sexe, date, color, estdresser, racechien);
+
+                nombre_d_animeau.add(animale);
+
+                System.out.println(" animale a ete ajouter a l'animalerie : ");
+
+                System.out.println("-----------------------------------------");
+
+                display_caracteristique_animal(animale);
+
+                break;
 
 
             case "chat":
-
 
 
                 System.out.println("---------Caractère-----------");
@@ -405,7 +462,7 @@ public class Animalerie {
 
                 int c = scanner.nextInt();
 
-                CaractèreAnimal carac = CaractèreAnimal.convert(c) ;
+                CaractèreAnimal carac = CaractèreAnimal.convert(c);
 
                 System.out.println("------------------");
 
@@ -413,13 +470,13 @@ public class Animalerie {
 
                 String choixpoile = scanner.next();
 
-                boolean veutpoilelong ;
+                boolean veutpoilelong;
 
-                if (choixpoile.equals("y")){
-                    veutpoilelong = true ;
-                }else{
+                if (choixpoile.equals("y")) {
+                    veutpoilelong = true;
+                } else {
 
-                    veutpoilelong= false ;
+                    veutpoilelong = false;
                 }
 
                 System.out.println("------------------");
@@ -428,24 +485,43 @@ public class Animalerie {
 
                 String choixgriffe = scanner.next();
 
-                boolean veutgriffecoupe ;
+                boolean veutgriffecoupe;
 
-                if (choixgriffe.equals("y")){
-                    veutgriffecoupe = true ;
-                }else{
+                if (choixgriffe.equals("y")) {
+                    veutgriffecoupe = true;
+                } else {
 
-                    veutgriffecoupe = false ;
+                    veutgriffecoupe = false;
                 }
 
                 System.out.println("------------------");
 
+                animale = new Chat(nom, poid, taille, age, agehumain, sexe, date,
+                        veutgriffecoupe, veutpoilelong, carac);
 
+                nombre_d_animeau.add(animale);
 
+                System.out.println(" animale a ete ajouter a l'animalerie : ");
 
+                System.out.println("-----------------------------------------");
 
+                display_caracteristique_animal(animale);
+
+                break;
 
 
             case "oiseau":
+
+                System.out.println("---------couleur oiseau-----------");
+                System.out.println(" : rouge");
+                System.out.println(" : vert");
+                System.out.println(" : jaune");
+                System.out.println(" : bleu");
+                System.out.println(" : brun");
+                System.out.println(" : noir");
+                System.out.println(" : blanc");
+                System.out.println("other string : violet");
+                System.out.println("----------------------------------");
 
                 System.out.print("Couleur oiseau : ");
 
@@ -455,6 +531,48 @@ public class Animalerie {
 
                 System.out.println("------------------");
 
+                System.out.print("vie volière ? y/n : ");
+
+                String choixvievo = scanner.next();
+
+                boolean veutvievo;
+
+                if (choixvievo.equals("y")) {
+                    veutvievo = true;
+                } else {
+
+                    veutvievo = false;
+                }
+
+                System.out.println("------------------");
+
+                System.out.print("vie volière ? y/n : ");
+
+                String choixcage = scanner.next();
+
+                boolean veutcage;
+
+                if (choixvievo.equals("y")) {
+                    veutcage = true;
+                } else {
+
+                    veutcage = false;
+                }
+
+                System.out.println("------------------");
+
+                animale = new Oiseaux(nom, poid, taille, age, agehumain, sexe, date, col, veutvievo, veutcage);
+
+                nombre_d_animeau.add(animale);
+
+                System.out.println(" animale a ete ajouter a l'animalerie : ");
+
+                System.out.println("-----------------------------------------");
+
+                display_caracteristique_animal(animale);
+
+                break;
+
             default:
 
                 System.out.println("animal pas valide");
@@ -462,9 +580,69 @@ public class Animalerie {
         }
 
 
-
         // Chien chien = new Chien();
 
+
+    }
+
+    public void askAction() {
+
+        Scanner scanner = new Scanner(System.in);
+
+
+        System.out.println("--------------------");
+
+        System.out.println("Bonjour utilisateur ");
+
+        System.out.println("--------------------");
+
+        System.out.println("Que voulez vous faire ? ");
+
+        System.out.println("--------------------");
+
+        System.out.println("encoder --> (e) / lister les caractèristique des animeau --> (l)");
+
+        System.out.println("vérifier les annimaux qui on passer la nuit  --> (v) ou quitter (other letter) ");
+
+        String choix = scanner.next();
+
+        switch (choix) {
+
+            case "e":
+
+                encoderAnimal();
+
+                break;
+
+            case "l":
+
+
+                System.out.println("");
+
+                afficherList(nombre_d_animeau);
+
+                System.out.println("choissisez la possition de l'animale  ");
+
+                int pos = scanner.nextInt();
+
+
+                display_caracteristique_animal(nombre_d_animeau.get(pos));
+
+                break;
+
+            case "v":
+
+                on_passer_la_nuit();
+
+                break;
+
+
+            default:
+                System.out.println("Au revoir ! ");
+                break;
+
+
+        }
 
     }
 

@@ -51,18 +51,24 @@ public class Main {
         animalerie.addAnimau(oiseaux1);
 
         animalerie.addAnimau(oiseaux2);
+/*
 
         animalerie.display_nb_chat();
 
         animalerie.display_nb_chien();
 
         animalerie.display_nb_Oiseaux();
+ */
 
-        animalerie.afficherList(animalerie.getNombre_d_animeau());
+       // animalerie.afficherList(animalerie.getNombre_d_animeau());
 
         //animalerie.on_passer_la_nuit();
 
-        animalerie.display_caracteristique_animal(chat1);
+       // animalerie.display_caracteristique_animal(chat1);
+
+       // animalerie.encoderAnimal();
+
+        animalerie.askAction();
 
 
     }

@@ -5,7 +5,7 @@ import animalerie.enumeration.Sexe;
 
 import java.time.LocalDate;
 
-public class Animale {
+public abstract class Animale {
 
     private String nom ;
 
