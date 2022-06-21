@@ -14,4 +14,6 @@ public class Humain extends Hero {
     public int getForce() {
         return super.getForce() + 1;
     }
+
+
 }

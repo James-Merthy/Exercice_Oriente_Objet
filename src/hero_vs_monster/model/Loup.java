@@ -22,4 +22,9 @@ public class Loup extends Monstre implements Cuivre {
 
 
     }
+
+    @Override
+    public String toString() {
+        return "L";
+    }
 }

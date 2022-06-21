@@ -1,5 +1,8 @@
 package hero_vs_monster.personnage;
 
+import hero_vs_monster.map.Map;
+import hero_vs_monster.model.Possition;
+
 import java.util.*;
 
 public abstract class Personnage {
@@ -16,14 +19,38 @@ public abstract class Personnage {
 
     private boolean dead = false;
 
+    private Possition pos ;
+
+
+    public Possition getPos() {
+        return pos;
+    }
+
+    public void setPos(Possition pos) {
+        this.pos = pos;
+    }
+
+    public void move(){
+
+
+    }
+
+    public void posDuPerso (int x , int y){
+
+        this.pos = new Possition(x,y) ;
+
+    }
+
+    public Possition getposDuPerso (){
+
+        return pos ;
+    }
 
     public Personnage(String nom) {
 
         this.nom = nom;
         this.endurence = getEndurence();
-
-        this.force = getForce();
-
+       this.force = getForce();
         this.point_de_vie = endurence + modificateur(endurence);
 
     }
@@ -243,15 +270,14 @@ public abstract class Personnage {
 
     }
 
-    public void regen (){
-        int regen = point_de_vie ;
-        point_de_vie = point_de_vie ;
+    public void regen() {
+        int regen = point_de_vie;
+        point_de_vie = point_de_vie;
     }
 
     public void duel(Personnage p1, Personnage p2) {
 
         boolean vainqueur = false;
-
 
 
         while (vainqueur == false) {
@@ -273,7 +299,7 @@ public abstract class Personnage {
 
             }
 
-            if (!vainqueur ) {
+            if (!vainqueur) {
 
                 if (p2.getPoint_de_vie() > 0) {
 
@@ -338,6 +364,8 @@ public abstract class Personnage {
     public void setDead(boolean dead) {
         this.dead = dead;
     }
+
+
 
     public static void main(String[] args) {
 
