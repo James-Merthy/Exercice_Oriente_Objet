@@ -1,9 +1,9 @@
-package compette;
+package compette.exception.Sportif;
 
 import java.time.LocalDate;
 import java.util.Random;
 
-public class Sportif {
+public abstract class Sportif  {
 
     private String nom ;
 

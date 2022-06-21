@@ -2,61 +2,71 @@ package compette;
 
 import compette.exception.EtatCompetitionException;
 import compette.exception.LimitePlaceException;
+import compette.exception.Sportif.Coureur;
+import compette.exception.Sportif.Judoka;
+import compette.exception.Sportif.LanceureJavlo;
+import compette.exception.Sportif.Sportif;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class Competition {
+public class Competition <T extends Sportif>  {
 
     private  final int limiteDeparticipant ;
 
-    private final Map<Sportif , Integer> participent = new HashMap<>() ;
+    private final Map<T , Integer> participent = new HashMap<>() ;
 
     private boolean terminée ;
 
-    private List<Sportif> classement ;
+    private List<T> classement ;
+
+    private  T sportif ;
 
     public Competition() {
 
         limiteDeparticipant = 0 ;
 
-
     }
 
-    public Competition(int limiteDeparticipant) {
+
+    public Competition(int limiteDeparticipant ) {
 
         if (limiteDeparticipant < 0)
 
             throw new IllegalArgumentException("la limite de ");
 
         this.limiteDeparticipant = limiteDeparticipant;
+
+
+    }
+
+    public T getSportif() {
+        return sportif;
+    }
+
+    public void setSportif(T sportif) {
+        this.sportif = sportif;
     }
 
     public void lancer(){
 
-        if (terminée)
-            throw new EtatCompetitionException(terminée , false);
 
-        if (participent.size() <= 3)
+        // n'est pas terminé
+        if( estTerminer()  )
+            throw new EtatCompetitionException(estTerminer(), false);
 
+        // Pas de participants
+        if( participent.size() < 3 )
             throw new IllegalStateException("La compet n'a pas assez de participants");
 
+        participent.put(sportif, (sportif).performer());
 
+        classement = genererClassement();
 
-        for (Sportif sportif:participent.keySet()
-             ) {
-
-            participent.put(sportif, sportif.performer());
-
-        }
-
-        // participent.replaceAll((s, v) -> s.performer());
-
-        terminée = true ;
 
     }
 
-    public void inscrire(Sportif sportif){
+    public void inscrire(T sportiff){
 
         // n'est pas terminé
         if (estTerminer())
@@ -67,12 +77,13 @@ public class Competition {
         // doit etre non inscrit
         if (participent.containsKey(sportif))
             throw new IllegalArgumentException("sportif déjà inscrit");
+        // doit être du même type
 
-        participent.put(sportif , null);
+        participent.put(sportiff , null);
 
     }
 
-    public void désinscrire(Sportif sportif){
+    public void désinscrire(T sportiff){
         //déjà términer
 
         if(terminée)
@@ -82,41 +93,39 @@ public class Competition {
         if (!participent.containsKey(sportif))
             throw new IllegalArgumentException("sportif non inscrit");
 
-
-        participent.remove(sportif);
+        participent.remove(sportiff);
 
     }
 
-    public Set<Sportif> estGagnants(){
+    public Set<T> estGagnants(){
 
         if(!terminée)
 
             throw new EtatCompetitionException(terminée , true);
 
-
-
             int maxPerf = participent.values().stream().mapToInt(i -> i).max().getAsInt() ;
 
 
-        Set<Sportif> gagnants = participent.entrySet().stream().filter(e -> e.getValue() == maxPerf)
+        Set<T> gagnants = participent.entrySet().stream().filter(e -> e.getValue() == maxPerf)
                 .map(Map.Entry::getKey)
                 .collect(Collectors.toSet());
 
         /*
 
- int maxPerf = 0 ;
+        Collection<Integer> values = participants.values();
+        int maxPerf = 0;
+        for (Integer value : values) {
+            if( value > maxPerf )
+                maxPerf = value;
+        }
 
-        for (Integer value: participent.values())
-
-            if(value > maxPerf)
-                maxPerf = value ;
-
-        Set<Sportif>sportifs = new HashSet<>();
-
-        for (Map.Entry<Sportif , Integer> entry : participent.entrySet())
+        Set<Sportif> gagnants = new HashSet<>();
+        for (Map.Entry<Sportif, Integer> entry : participants.entrySet()) {
+            if( entry.getValue() == maxPerf )
+                gagnants.add(entry.getKey() );
+        }
 
          */
-
 
 
         return gagnants ;
@@ -131,42 +140,35 @@ public class Competition {
         return limiteDeparticipant;
     }
 
-    private List<Sportif> genererClassement (){
+    private List<T> genererClassement (){
 
-        List <Sportif> classement = new ArrayList<>();
+        List<T> classement = new ArrayList<>();
 
-        for (Sportif sportif :participent.keySet()) {
+        for (T sportif : participent.keySet()) {
 
-            boolean placer = false ;
-
-            for (int i = 0 ; i < classement.size() ; i++){
+            boolean place = false;
+            for (int i = 0; i < classement.size() && ! place ; i++) {
 
                 Sportif currentSportif = classement.get(i);
-                int currentPer = participent.get(currentSportif);
+                int currentPerf = participent.get(currentSportif);
 
-                int perfSportAplacer = participent.get(sportif);
+                int perfSportAPlacer = participent.get(sportif);
 
-                if (perfSportAplacer > currentPer){
-
+                if( perfSportAPlacer > currentPerf ){
                     classement.add(i, sportif);
+                    place = true;
                 }
-
-                if (perfSportAplacer > currentPer){
-
-                    classement.add(i,sportif);
-
-                    placer = true ;
-
-                }
-
             }
+
+            if( !place )
+                classement.add(sportif);
 
         }
 
-        return classement ;
+        return classement;
     }
 
-    public List<Sportif> getClassement() {
+    public List<T> getClassement() {
         return new ArrayList<>(classement) ;
     }
 }
